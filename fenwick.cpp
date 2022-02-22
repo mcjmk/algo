@@ -1,44 +1,44 @@
- #include <bits/stdc++.h>
- using namespace std;
+#include <bits/stdc++.h>
+using namespace std;
 
- constexpr int N=1e3;
+vector<int>a, fenwick;  // a - x1, x2, ..., xn
 
-
- int x, val;
- vector<int>a;
- vector<int>D(15);
-
- //int a[N],D[N];
-
- int pref (int x){
+int pref (int x){
     if (x==0)
         return 0;
-    return D[x]+pref(x-(x& (-x))); }
+    return fenwick[x]+pref(x-(x& (-x)));}
 
 void upd (int x, int val){
-    if (x>D.size()) return;
-    D[x]+=val;
-    upd(x+(x& (-x)), val); }
+    if (x>fenwick.size()) return;
+    fenwick[x]+=val;
+    upd(x+(x& (-x)), val);}
 
-int n;
 int main (){
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
 
-    cin>>n;
 
-    bool rodzaj;
-    for (int i=1; i<=n; i++){
-         cin>>rodzaj;
-         if (rodzaj){
+    int n,q;
+    cin>>n>>q;
+
+    a.resize(n+1);
+    D.resize(n+1);
+
+    while (t--){
+        bool rodzaj;
+        int x, val;
+        cin>>rodzaj;
+
+        if (rodzaj){
             cin>>x>>val;
             a.push_back(x);
             upd(x,val);}
-
-
-         else{
+        else{
             cin>>x;
-            cout<<pref(x); }
-
+            cout<<pref(x);
+        }
     }
 
 
- }
+}
